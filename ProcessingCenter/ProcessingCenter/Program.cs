@@ -1,6 +1,5 @@
 public class ProcessingCenter
 {
-    public static List<string> toDeleteFiles = new List<string>();
     public static void Main()
     {
         int countOfThreads = 4; //определяем количество потоков
@@ -60,7 +59,7 @@ public class ProcessingCenter
             Delay = DateTime.Parse(DateTime.Now.AddMinutes(1).ToString()[..^3]) - DateTime.Now;
             Console.WriteLine(Delay + " left until the next update");
             Thread.Sleep(Delay);
-            for(int i = 0; i < emailTasks0.Length; i++)
+            for (int i = 0; i < emailTasks0.Length; i++)
             {
                 Treads[i].Interrupt();
             }
@@ -90,7 +89,6 @@ public class ProcessingCenter
                 if (DateTime.Now.ToString()[..^3] == date.ToString()[..^3])
                 {
                     task.CurrentThread = Thread.CurrentThread.GetHashCode();
-                    toDeleteFiles.Add((Thread.CurrentThread.GetHashCode().ToString() + task.TaskId.ToString()));
                     EmailSender.SendEmail(task);
                     Database.Trigger(task);
                 }
@@ -98,6 +96,6 @@ public class ProcessingCenter
         }
     }
 }
-    
+
 
 
