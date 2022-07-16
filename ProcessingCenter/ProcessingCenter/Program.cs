@@ -3,7 +3,7 @@ public class ProcessingCenter
     public static List<string> toDeleteFiles = new List<string>();
     public static void Main()
     {
-        int countOfThreads = 4;
+        int countOfThreads = 4; //определяем количество потоков
 
         Database.CreateIfNotExist();
         DirectoryInfo dirInfo = new DirectoryInfo("C:\\papka\\1");
