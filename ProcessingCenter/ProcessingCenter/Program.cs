@@ -39,7 +39,7 @@ public class ProcessingCenter
                 w = t * (i == 0 ? 1 : i + 1);
                 if (i == countOfThreads - 1)
                 {
-                    w = w + (emailTasks.Count % countOfThreads);
+                    w += emailTasks.Count % countOfThreads;
                 }
 
                 for (j = j1; j < w; j++)
