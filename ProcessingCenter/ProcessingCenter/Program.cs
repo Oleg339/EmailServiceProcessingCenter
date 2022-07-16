@@ -1,4 +1,4 @@
-﻿public class ProcessingCenter
+public class ProcessingCenter
 {
     public static List<string> toDeleteFiles = new List<string>();
     public static void Main()
@@ -15,11 +15,11 @@
 
 
         List<EmailTask> emailTasks = new List<EmailTask>();
-        TimeSpan Duracity = DateTime.Parse(DateTime.Now.AddMinutes(1).ToString()[..^3]) - DateTime.Now;
+        TimeSpan Delay = DateTime.Parse(DateTime.Now.AddMinutes(1).ToString()[..^3]) - DateTime.Now;
 
-        if (Duracity < TimeSpan.FromMinutes(1))
+        if (Delay < TimeSpan.FromMinutes(1))
         {
-            Thread.Sleep(Duracity);
+            Thread.Sleep(Delay);
         }
         while (true)
         {
@@ -30,7 +30,7 @@
             List<EmailTask>[] emailTasks0 = new List<EmailTask>[countOfThreads];
             for (int i = 0; i < countOfThreads; i++)
             {
-                emailTasks0[i] = new List<EmailTask>();
+                emailTasks0[i] = new List<EmailTask>();                          //распределяем задачи по потокам. Остаток остается последнему потоку.
             }
 
             int j1 = 0, j, w;
@@ -57,9 +57,9 @@
                 Treads.Add(new Thread(TreadStarts[i]));
                 Treads[i].Start(emailTasks0[i]);
             }
-            Duracity = DateTime.Parse(DateTime.Now.AddMinutes(1).ToString()[..^3]) - DateTime.Now;
-            Console.WriteLine(Duracity + " left until the next update");
-            Thread.Sleep(Duracity);
+            Delay = DateTime.Parse(DateTime.Now.AddMinutes(1).ToString()[..^3]) - DateTime.Now;
+            Console.WriteLine(Delay + " left until the next update");
+            Thread.Sleep(Delay);
             for(int i = 0; i < emailTasks0.Length; i++)
             {
                 Treads[i].Interrupt();
